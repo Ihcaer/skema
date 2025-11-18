@@ -1,0 +1,90 @@
+// Enums
+
+enum AuthVerification {
+  VERIFIED
+  WAITING
+  NONVERIFIED
+
+  @@map("Verification")
+  @@schema("auth")
+}
+
+enum AuthTokenType {
+  REGISTER
+  PASSWORD_RESET
+
+  @@map("TokenType")
+  @@schema("auth")
+}
+
+// Models
+
+model AuthAdmin {
+  id           Int              @id @default(autoincrement())
+  displayName  String
+  handleName   String           @unique
+  avatarId     Int?             @unique
+  email        String           @unique
+  password     String?
+  privileges   Int
+  lastLogged   DateTime         @db.Timestamptz(3)
+  verification AuthVerification @default(WAITING)
+  isActivated  Boolean          @default(true)
+  createdAt    DateTime         @default(now()) @db.Timestamptz(3)
+  updatedAt    DateTime         @updatedAt @db.Timestamptz(3)
+
+  token                     AuthOneTimeToken?
+  refreshToken              AuthRefreshToken?
+  preferences               AuthPreferences?
+  actionLogs                AuditAdminLogs[]
+  approvalRequests          TeamApprovalRequest[]
+  approvalResponses         TeamApprovalResponses[]
+  avatar                    FilesFile?              @relation("AdminAvatar", fields: [avatarId], references: [id], onDelete: SetNull)
+  createdFiles              FilesFile[]             @relation("AuthorToFile")
+  editedFiles               FilesFile[]             @relation("EditorToFile")
+  createdFolders            FilesFolder[]           @relation("AuthorToFolder")
+  editedFolders             FilesFolder[]           @relation("EditorToFolder")
+  originalAuthorToBlogPosts BlogPost[]              @relation("OriginalAuthorToBlogPost")
+  publicAuthorToBlogPosts   BlogPost[]              @relation("PublicAuthorToBlogPost")
+  editedBlogPosts           BlogPost[]              @relation("EditorToBlogPost")
+  createdBlogCategories     BlogCategory[]          @relation("CreatorToBlogCategory")
+  editedBlogCategories      BlogCategory[]          @relation("EditorToBlogCategory")
+  createdBlogTags           BlogTag[]               @relation("CreatorToBlogTag")
+  editedBlogTags            BlogTag[]               @relation("EditorToBlogTag")
+
+  @@map("admins")
+  @@schema("auth")
+}
+
+model AuthOneTimeToken {
+  adminId     Int           @id @unique
+  hashedToken String        @unique
+  type        AuthTokenType
+  expiresAt   DateTime      @db.Timestamptz(3)
+
+  admin AuthAdmin @relation(fields: [adminId], references: [id], onDelete: Cascade)
+
+  @@map("one_time_tokens")
+  @@schema("auth")
+}
+
+model AuthRefreshToken {
+  adminId          Int      @id @unique
+  refreshTokenHash String   @unique
+  expiresAt        DateTime @db.Timestamptz(3)
+
+  admin AuthAdmin @relation(fields: [adminId], references: [id], onDelete: Cascade)
+
+  @@map("refresh_tokens")
+  @@schema("auth")
+}
+
+model AuthPreferences {
+  adminId     Int  @id @unique
+  preferences Json
+
+  admin AuthAdmin @relation(fields: [adminId], references: [id], onDelete: Cascade)
+
+  @@map("preferences")
+  @@schema("auth")
+}

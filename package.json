@@ -1,0 +1,24 @@
+{
+  "name": "Skema",
+  "version": "0.0.1",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "frontend/admin",
+    "frontend/main"
+  ],
+  "scripts": {
+    "start:dev": "docker compose -f docker-compose.yml -f docker-compose.dev.yml up --build",
+    "start:prod": "docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build",
+    "stop": "docker compose down",
+    "install:backend": "npm install --prefix ./backend",
+    "install:frontend": "npm run install:frontend:admin && npm run install:frontend:main",
+    "install:frontend:admin": "npm install --workspace=frontend/admin",
+    "install:frontend:main": "npm install --workspace=frontend/main",
+    "test:all": "npm run test --workspaces",
+    "test:backend": "npm run test --workspace=backend",
+    "test:frontend": "npm run test:frontend:admin && npm run test:frontend:main",
+    "test:frontend:admin": "npm run test --workspace=frontend/admin",
+    "test:frontend:main": "npm run test --workspace=frontend/main"
+  }
+}

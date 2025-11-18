@@ -1,0 +1,55 @@
+// Enums
+
+enum AuditLogLevel {
+  INFO
+  WARN
+  ERROR
+  CRITICAL
+
+  @@map("LogLevel")
+  @@schema("audit")
+}
+
+enum AuditBackendModule {
+  URL_MANAGER
+  AUTH
+  AUDIT
+  TEAM
+  FILES
+  BLOG
+
+  @@map("Modules")
+  @@schema("audit")
+}
+
+// Models
+
+model AuditSystemLogs {
+  id        Int                @id @default(autoincrement())
+  level     AuditLogLevel      @default(INFO)
+  source    AuditBackendModule
+  message   String
+  createdAt DateTime           @default(now()) @db.Timestamptz(3)
+
+  @@map("system_logs")
+  @@schema("audit")
+}
+
+model AuditAdminLogs {
+  id          Int                @id @default(autoincrement())
+  adminId     Int?
+  action      String
+  module      AuditBackendModule
+  entityType  String
+  entityId    Int?
+  description String
+  metadata    Json
+  createdAt   DateTime           @default(now()) @db.Timestamptz(3)
+
+  admin AuthAdmin? @relation(fields: [adminId], references: [id], onDelete: SetNull)
+
+  @@index([adminId])
+  @@index([action])
+  @@map("admin_logs")
+  @@schema("audit")
+}

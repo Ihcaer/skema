@@ -1,0 +1,52 @@
+// Enums
+
+enum TeamRequestStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  CANCELED
+
+  @@map("RequestStatus")
+  @@schema("team")
+}
+
+// Models
+
+model TeamApprovalRequest {
+  id                Int               @id @default(autoincrement())
+  requesterId       Int
+  actionType        String
+  entityType        String
+  entityId          Int?
+  payload           Json
+  status            TeamRequestStatus
+  requiredApprovals Int               @default(3) @db.SmallInt
+  receivedApprovals Int               @default(0) @db.SmallInt
+  expiredAt         DateTime          @db.Timestamptz(3)
+  createdAt         DateTime          @default(now()) @db.Timestamptz(3)
+  updatedAt         DateTime          @updatedAt @db.Timestamptz(3)
+
+  requester             AuthAdmin               @relation(fields: [requesterId], references: [id], onDelete: Cascade)
+  TeamApprovalResponses TeamApprovalResponses[]
+
+  @@index([requesterId])
+  @@index([status])
+  @@map("approval_requests")
+  @@schema("team")
+}
+
+model TeamApprovalResponses {
+  id                Int      @id @default(autoincrement())
+  approvalRequestId Int
+  approverId        Int?
+  decision          Boolean
+  createdAt         DateTime @default(now()) @db.Timestamptz(3)
+
+  approvalRequest TeamApprovalRequest @relation(fields: [approvalRequestId], references: [id], onDelete: Cascade)
+  approver        AuthAdmin?          @relation(fields: [approverId], references: [id], onDelete: SetNull)
+
+  @@index([approvalRequestId])
+  @@index([approverId])
+  @@map("approval_responses")
+  @@schema("team")
+}

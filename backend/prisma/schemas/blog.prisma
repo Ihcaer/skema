@@ -1,0 +1,75 @@
+// Enums
+
+enum BlogPostStatus {
+  PUBLISHED
+  WAITING
+  SKETCH
+  DELETED
+
+  @@map("PostStatus")
+  @@schema("blog")
+}
+
+// Models
+
+model BlogPost {
+  id               Int            @id @default(autoincrement())
+  title            String
+  content          String
+  featuredImageId  Int?
+  modifications    Json
+  categoryId       Int
+  originalAuthorId Int?
+  publicAuthorId   Int?
+  editedById       Int?
+  status           BlogPostStatus @default(SKETCH)
+  slug             String
+  publicationDate  DateTime?      @db.Timestamptz(3)
+  createdAt        DateTime       @default(now()) @db.Timestamptz(3)
+  updatedAt        DateTime       @updatedAt @db.Timestamptz(3)
+
+  category       BlogCategory @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  tags           BlogTag[]
+  originalAuthor AuthAdmin?   @relation("OriginalAuthorToBlogPost", fields: [originalAuthorId], references: [id], onDelete: SetNull)
+  publicAuthor   AuthAdmin?   @relation("PublicAuthorToBlogPost", fields: [publicAuthorId], references: [id], onDelete: SetNull)
+  editor         AuthAdmin?   @relation("EditorToBlogPost", fields: [editedById], references: [id], onDelete: SetNull)
+  featuredImage  FilesFile?   @relation("FeaturedImageToBlogPost", fields: [featuredImageId], references: [id], onDelete: SetNull)
+
+  @@unique([categoryId, slug])
+  @@map("posts")
+  @@schema("blog")
+}
+
+model BlogCategory {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  slug        String   @unique
+  description String
+  createdById Int?
+  editedById  Int?
+  createdAt   DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt   DateTime @updatedAt @db.Timestamptz(3)
+
+  posts   BlogPost[]
+  creator AuthAdmin? @relation("CreatorToBlogCategory", fields: [createdById], references: [id], onDelete: SetNull)
+  editor  AuthAdmin? @relation("EditorToBlogCategory", fields: [editedById], references: [id], onDelete: SetNull)
+
+  @@map("categories")
+  @@schema("blog")
+}
+
+model BlogTag {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  createdById Int?
+  editedById  Int?
+  createdAt   DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt   DateTime @updatedAt @db.Timestamptz(3)
+
+  posts   BlogPost[]
+  creator AuthAdmin? @relation("CreatorToBlogTag", fields: [createdById], references: [id], onDelete: SetNull)
+  editor  AuthAdmin? @relation("EditorToBlogTag", fields: [editedById], references: [id], onDelete: SetNull)
+
+  @@map("tags")
+  @@schema("blog")
+}

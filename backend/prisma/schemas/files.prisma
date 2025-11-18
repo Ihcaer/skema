@@ -1,0 +1,82 @@
+// Enums
+
+enum FilesAccessType {
+  PUBLIC
+  PRIVATE
+
+  @@map("AccessType")
+  @@schema("files")
+}
+
+enum FilesRelatableType {
+  POST
+
+  @@map("RelatableType")
+  @@schema("files")
+}
+
+// Models
+
+model FilesFile {
+  id         Int             @id @default(autoincrement())
+  bucketName String
+  objectKey  String
+  filename   String
+  mimeType   String
+  sizeBites  BigInt
+  folderId   Int
+  authorId   Int?
+  editedById Int?
+  accessType FilesAccessType
+  isListed   Boolean         @default(true)
+  createdAt  DateTime        @default(now()) @db.Timestamptz(3)
+  updatedAt  DateTime        @updatedAt @db.Timestamptz(3)
+
+  folder                      FilesFolder      @relation(fields: [folderId], references: [id], onDelete: Cascade)
+  usage                       FilesFileUsage[]
+  author                      AuthAdmin?       @relation("AuthorToFile", fields: [authorId], references: [id], onDelete: SetNull)
+  editor                      AuthAdmin?       @relation("EditorToFile", fields: [editedById], references: [id], onDelete: SetNull)
+  usedAsAvatar                AuthAdmin?       @relation("AdminAvatar")
+  usedAsFeaturedBlogPostImage BlogPost[]       @relation("FeaturedImageToBlogPost")
+
+  @@unique([bucketName, objectKey, filename])
+  @@index([folderId])
+  @@map("files")
+  @@schema("files")
+}
+
+model FilesFolder {
+  id         Int      @id @default(autoincrement())
+  name       String
+  icon       String?
+  parentId   Int?
+  authorId   Int?
+  editedById Int?
+  createdAt  DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt  DateTime @updatedAt @db.Timestamptz(3)
+
+  parent   FilesFolder?  @relation("FolderHierarchy", fields: [parentId], references: [id], onDelete: Cascade)
+  children FilesFolder[] @relation("FolderHierarchy")
+  files    FilesFile[]
+  author   AuthAdmin?    @relation("AuthorToFolder", fields: [authorId], references: [id], onDelete: SetNull)
+  editor   AuthAdmin?    @relation("EditorToFolder", fields: [editedById], references: [id], onDelete: SetNull)
+
+  @@index([parentId])
+  @@map("folders")
+  @@schema("files")
+}
+
+model FilesFileUsage {
+  id            Int                @id @default(autoincrement())
+  fileId        Int
+  relatableType FilesRelatableType
+  relatableId   Int
+  createdAt     DateTime           @default(now()) @db.Timestamptz(3)
+
+  file FilesFile @relation(fields: [fileId], references: [id], onDelete: Cascade)
+
+  @@unique([fileId, relatableType, relatableId])
+  @@index([fileId, relatableId])
+  @@map("file_usage")
+  @@schema("files")
+}

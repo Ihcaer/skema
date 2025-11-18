@@ -1,0 +1,24 @@
+// Enums
+
+enum UrlManagerRedirectCode {
+  MOVED_PERMANENTLY_301
+  FOUND_302
+  TEMPORARY_REDIRECT_307
+  PERMANENT_REDIRECT_308
+
+  @@map("RedirectCode")
+  @@schema("url_manager")
+}
+
+// Models
+
+model UrlManagerRedirect {
+  id           Int                    @id @default(autoincrement())
+  sourceUrl    String                 @unique
+  targetUrl    String
+  redirectType UrlManagerRedirectCode
+  createdAt    DateTime               @default(now()) @db.Timestamptz(3)
+
+  @@map("redirects")
+  @@schema("url_manager")
+}
