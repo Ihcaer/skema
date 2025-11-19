@@ -10,6 +10,7 @@
       "executor": "@angular/build:application",
       "outputs": ["{options.outputPath}"],
       "options": {
+        "baseHref": "/admin/",
         "outputPath": "dist/apps/skema-admin-frontend",
         "browser": "apps/skema-admin-frontend/src/main.ts",
         "polyfills": ["zone.js"],

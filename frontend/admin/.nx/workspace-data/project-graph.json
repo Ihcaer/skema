@@ -54,8 +54,7 @@
             ],
             "outputs": [
               "{workspaceRoot}/dist/.playwright/apps/skema-admin-frontend-e2e/test-output",
-              "{workspaceRoot}/dist/.playwright/apps/skema-admin-frontend-e2e/playwright-report",
-              "{workspaceRoot}/dist/.playwright/apps/skema-admin-frontend-e2e/blob-report"
+              "{workspaceRoot}/dist/.playwright/apps/skema-admin-frontend-e2e/playwright-report"
             ],
             "executor": "nx:run-commands",
             "configurations": {},
@@ -66,8 +65,7 @@
               "cwd": "apps/skema-admin-frontend-e2e",
               "env": {
                 "PLAYWRIGHT_HTML_OUTPUT_DIR": "..\\..\\dist\\.playwright\\apps\\skema-admin-frontend-e2e\\playwright-report\\src-example-spec-ts",
-                "PLAYWRIGHT_HTML_REPORT": "..\\..\\dist\\.playwright\\apps\\skema-admin-frontend-e2e\\playwright-report\\src-example-spec-ts",
-                "PLAYWRIGHT_BLOB_OUTPUT_FILE": "..\\..\\dist\\.playwright\\apps\\skema-admin-frontend-e2e\\blob-report\\src-example-spec-ts.zip"
+                "PLAYWRIGHT_HTML_REPORT": "..\\..\\dist\\.playwright\\apps\\skema-admin-frontend-e2e\\playwright-report\\src-example-spec-ts"
               },
               "command": "playwright test src/example.spec.ts --output=..\\..\\dist\\.playwright\\apps\\skema-admin-frontend-e2e\\test-output\\src-example-spec-ts"
             },
@@ -105,8 +103,7 @@
             ],
             "outputs": [
               "{workspaceRoot}/dist/.playwright/apps/skema-admin-frontend-e2e/test-output/src-example-spec-ts",
-              "{workspaceRoot}/dist/.playwright/apps/skema-admin-frontend-e2e/playwright-report/src-example-spec-ts",
-              "{workspaceRoot}/dist/.playwright/apps/skema-admin-frontend-e2e/blob-report/src-example-spec-ts.zip"
+              "{workspaceRoot}/dist/.playwright/apps/skema-admin-frontend-e2e/playwright-report/src-example-spec-ts"
             ],
             "executor": "nx:run-commands",
             "configurations": {},
@@ -126,8 +123,7 @@
             ],
             "outputs": [
               "{workspaceRoot}/dist/.playwright/apps/skema-admin-frontend-e2e/test-output",
-              "{workspaceRoot}/dist/.playwright/apps/skema-admin-frontend-e2e/playwright-report",
-              "{workspaceRoot}/dist/.playwright/apps/skema-admin-frontend-e2e/blob-report"
+              "{workspaceRoot}/dist/.playwright/apps/skema-admin-frontend-e2e/playwright-report"
             ],
             "dependsOn": [
               {
@@ -259,6 +255,7 @@
               "{options.outputPath}"
             ],
             "options": {
+              "baseHref": "/admin/",
               "outputPath": "dist/apps/skema-admin-frontend",
               "browser": "apps/skema-admin-frontend/src/main.ts",
               "polyfills": [
@@ -30518,5 +30515,5 @@
   },
   "version": "6.0",
   "errors": [],
-  "computedAt": 1763178503814
+  "computedAt": 1763522708576
 }

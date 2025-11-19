@@ -410,6 +410,10 @@
       "apps/skema-admin-frontend/project.json",
       "nx/core/project-json"
     ],
+    "targets.build.options.baseHref": [
+      "apps/skema-admin-frontend/project.json",
+      "nx/core/project-json"
+    ],
     "targets.build.options.outputPath": [
       "apps/skema-admin-frontend/project.json",
       "nx/core/project-json"

@@ -19,64 +19,100 @@
   "fileMap": {
     "nonProjectFiles": [
       {
-        "file": "nx.json",
-        "hash": "15325406272154716945"
+        "file": "Dockerfile",
+        "hash": "11984058432709686748"
       },
       {
-        "file": "vitest.workspace.ts",
-        "hash": "4665328684042819579"
+        "file": "nginx/default.conf",
+        "hash": "5510910576374696785"
       },
       {
-        "file": ".prettierrc",
-        "hash": "16267754514737964994"
-      },
-      {
-        "file": "package-lock.json",
-        "hash": "2762620083206147279"
-      },
-      {
-        "file": "package.json",
-        "hash": "12161866165103043163"
+        "file": ".nx/workspace-data/1627af72-dca0-4e64-b4f0-dc6ed393c6d5.db-wal",
+        "hash": "4850774734379176110"
       },
       {
         "file": ".prettierignore",
         "hash": "5407418692668764289"
       },
       {
-        "file": "Dockerfile",
-        "hash": "11984058432709686748"
+        "file": "nx.json",
+        "hash": "15325406272154716945"
       },
       {
         "file": "README.md",
-        "hash": "14766637368953507523"
-      },
-      {
-        "file": ".gitignore",
-        "hash": "11213584256259957426"
-      },
-      {
-        "file": ".vscode/extensions.json",
-        "hash": "13417776046909105611"
-      },
-      {
-        "file": "eslint.config.mjs",
-        "hash": "8944620160701465"
-      },
-      {
-        "file": ".dockerignore",
-        "hash": "10880806770318535698"
-      },
-      {
-        "file": "tsconfig.base.json",
-        "hash": "16936441711144470533"
+        "hash": "3692178146078848721"
       },
       {
         "file": ".editorconfig",
         "hash": "5443105041930014821"
       },
       {
-        "file": "nginx/default.conf",
-        "hash": "5510910576374696785"
+        "file": ".nx/cache/terminalOutputs/4464603666765266627",
+        "hash": "9662296075988210332"
+      },
+      {
+        "file": "eslint.config.mjs",
+        "hash": "8944620160701465"
+      },
+      {
+        "file": "package.json",
+        "hash": "12764632328111170212"
+      },
+      {
+        "file": ".nx/workspace-data/source-maps.json",
+        "hash": "1154312721782788041"
+      },
+      {
+        "file": ".dockerignore",
+        "hash": "10880806770318535698"
+      },
+      {
+        "file": ".vscode/extensions.json",
+        "hash": "13417776046909105611"
+      },
+      {
+        "file": "vitest.workspace.ts",
+        "hash": "4665328684042819579"
+      },
+      {
+        "file": ".nx/workspace-data/playwright-5186013267177752385.hash",
+        "hash": "9966387817463175085"
+      },
+      {
+        "file": ".nx/workspace-data/project-graph.json",
+        "hash": "6316702168563279252"
+      },
+      {
+        "file": "tsconfig.base.json",
+        "hash": "16936441711144470533"
+      },
+      {
+        "file": ".nx/cache/run.json",
+        "hash": "6086000129944099350"
+      },
+      {
+        "file": ".nx/workspace-data/file-map.json",
+        "hash": "16008886091473770382"
+      },
+      {
+        "file": "package-lock.json",
+        "hash": "2762620083206147279"
+      },
+      {
+        "file": ".nx/cache/terminalOutputs/6140614015910644818",
+        "hash": "14188532208748822805"
+      },
+      {
+        "file": ".prettierrc",
+        "hash": "16267754514737964994"
+      },
+      {
+        "file": ".nx/workspace-data/eslint-2654242865465226088.hash",
+        "hash": "1450427665928456812"
+      },
+      {
+        "file": ".nx/workspace-data/nx_files.nxt",
+        "hash": "15457336455616452879"
       }
     ],
     "projectFileMap": {
@@ -123,7 +159,7 @@
         },
         {
           "file": "apps/skema-admin-frontend/project.json",
-          "hash": "17163851005078563326"
+          "hash": "18132578295168043168"
         },
         {
           "file": "apps/skema-admin-frontend/public/favicon.ico",
@@ -131,7 +167,7 @@
         },
         {
           "file": "apps/skema-admin-frontend/src/app/app.config.ts",
-          "hash": "4515289115773032281",
+          "hash": "16902880155900910598",
           "deps": [
             "npm:@angular/core",
             "npm:@angular/router"
@@ -177,11 +213,11 @@
         },
         {
           "file": "apps/skema-admin-frontend/src/environments/environment.example.ts",
-          "hash": "12515870944215689423"
+          "hash": "16505164523846568290"
         },
         {
           "file": "apps/skema-admin-frontend/src/index.html",
-          "hash": "16400920247214677383"
+          "hash": "5621377581890501340"
         },
         {
           "file": "apps/skema-admin-frontend/src/main.ts",
