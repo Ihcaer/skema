@@ -34,4 +34,4 @@ The **NGINX Reverse Proxy**, configured via files in the `devops` repository, is
 All services communicate using Docker's internal networking. The configuration ensures:
 
 1.  **Isolation:** The `db` service is placed on a private network, accessible **only** by the `backend` container.
-2.  **Access:** Both frontends communicate with the API by calling the **Reverse Proxy's** internal address (e.g., `http://localhost/api/v1/...`). The NGINX configuration then forwards this request to the `backend` service internally.
+2.  **Access:** Both frontends communicate with the API by calling the **Reverse Proxy's** internal address (e.g. `http://localhost/api/v1/...`). The NGINX configuration then forwards this request to the `backend` service internally.

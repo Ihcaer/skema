@@ -14,7 +14,10 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@themes/default-theme": ["libs/themes/default-theme/src/index.ts"],
+      "@ui/icons": ["libs/shared/ui/icons/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

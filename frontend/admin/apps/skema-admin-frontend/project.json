@@ -20,6 +20,16 @@
           {
             "glob": "**/*",
             "input": "apps/skema-admin-frontend/public"
+          },
+          {
+            "glob": "**/*",
+            "input": "apps/skema-admin-frontend/src/assets",
+            "output": "assets"
+          },
+          {
+            "glob": "**/*",
+            "input": "libs/shared/ui/icons/src/assets",
+            "output": "assets"
           }
         ],
         "styles": ["apps/skema-admin-frontend/src/styles.scss"]
