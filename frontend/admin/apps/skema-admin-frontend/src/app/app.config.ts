@@ -8,6 +8,7 @@ import { appRoutes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { providePrimeNG } from 'primeng/config';
 import { DefaultPreset } from '@themes/default-theme';
+import { provideMaterialSymbols } from '@ui/icons';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -20,5 +21,6 @@ export const appConfig: ApplicationConfig = {
         preset: DefaultPreset,
       },
     }),
+    provideMaterialSymbols(),
   ],
 };
