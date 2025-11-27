@@ -5,8 +5,11 @@
   "license": "UNLICENSED",
   "scripts": {
     "serve": "npx nx serve skema-admin-frontend",
-    "test": "npx nx test skema-admin-frontend",
-    "test:watch": "npx nx test skema-admin-frontend --watch",
+    "test": "npx nx run-many --target=test --all",
+    "test:parallel": "nx run-many --target=test --all --parallel",
+    "test:affected": "npx nx affected --target=test",
+    "test:affected:develop": "npx nx affected --target=test --base=develop",
+    "test:watch": "npx nx run-many --target=test --all --watch",
     "test:e2e": "npx nx e2e skema-admin-frontend-e2e",
     "build": "npx nx build skema-admin-frontend",
     "targets": "npx nx show project skema-admin-frontend"
