@@ -12,14 +12,14 @@ const CodeValueToSymbolMap: Record<string, PrismaRedirectCode> = {
   '308': 'PERMANENT_REDIRECT_308',
 } as const;
 
-const symbolValueToCode = (sybmol: PrismaRedirectCode): RedirectCode => {
-  const code: string = sybmol.slice(-3);
+const symbolValueToCode = (symbol: PrismaRedirectCode): RedirectCode => {
+  const code: string = symbol.slice(-3);
 
   if ((Object.values(RedirectCode) as string[]).includes(code)) {
     return code as RedirectCode;
   }
 
-  throw new Error(`Unknown DB Symbol Status: ${sybmol}`);
+  throw new Error(`Unknown DB Symbol Status: ${symbol}`);
 };
 
 @Injectable()
@@ -62,11 +62,13 @@ export class UrlManagerService {
       },
     });
 
-    if (!redirectRecord) return false;
-
-    return {
-      targetUrl: redirectRecord.targetUrl,
-      redirectCode: symbolValueToCode(redirectRecord.redirectType),
-    };
+    if (!redirectRecord) {
+      return false;
+    } else {
+      return {
+        targetUrl: redirectRecord.targetUrl,
+        redirectCode: symbolValueToCode(redirectRecord.redirectType),
+      };
+    }
   }
 }
